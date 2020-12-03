@@ -80,7 +80,7 @@ class TrainTeacher(object):
 
     def build(self):
         print(f'loading {self.model_name}..\n')
-         self.train()
+        self.train()
         self.test()
 
 
