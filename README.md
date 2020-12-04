@@ -92,7 +92,7 @@ The number of flops (on prund model): 401208200
 
 Then, the pruned model will be saved in 'result'(default) folder. The sub-architecture is represented when before and after pruning:
 
-<img src="./assets/fig1.png" alt="drawing" width="400"/>
+<img src="./assets/fig1.png" alt="drawing" width="500"/>
 
 
 ### ResNet 34 on cifar10
