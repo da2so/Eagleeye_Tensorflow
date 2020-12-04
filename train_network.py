@@ -14,6 +14,8 @@ class TrainTeacher(object):
         self.batch_size=batch_size
         self.model_name=model_name
         self.data_augmentation=data_augmentation
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
         self.save_path=f'{save_dir}{self.dataset_name}_{self.model_name}.h5'
         self.epochs=epochs
         self.metrics=metrics

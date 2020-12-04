@@ -24,6 +24,8 @@ class EagleEye(object):
         self.max_rate=max_rate
         self.flops_target=flops_target
         self.result_dir=result_dir
+        if not os.path.exists(self.result_dir):
+            os.makedirs(self.result_dir)
         self.model_path=model_path
         self.num_candidates=num_candidates
 
@@ -32,8 +34,6 @@ class EagleEye(object):
 
         #Load a dataset
         self.x_train,self.y_train,self.x_test, self.y_test,self.num_classes , self.img_shape = load_dataset(self.dataset_name, self.bs)
-
-        self.optimizer= k.optimizers.SGD(learning_rate=self.lr,momentum=0.9)
     
     def build(self):
 
@@ -90,7 +90,7 @@ class EagleEye(object):
             callback_list=list()
             
             if lr_reducer == True:
-                callback_list.append(tf.keras.callbacks.ReduceLROnPlateau(factor=0.1, cooldown=0, patience=10,verbose=2,mode='auto', epsilon=0.0001, min_lr=0))
+                callback_list.append(tf.keras.callbacks.ReduceLROnPlateau(factor=0.1, cooldown=0, patience=10,mode='auto', epsilon=0.0001, min_lr=0))
             if early_stop == True:
                 callback_list.append(tf.keras.callbacks.EarlyStopping(min_delta=0, patience=20, verbose=2, mode='auto'))
         
@@ -130,14 +130,14 @@ class EagleEye(object):
         params_prev = count_params(self.net.trainable_weights)
         flops_prev = count_flops(self.net)
         scores_prev= self.net.evaluate(self.x_test, self.y_test, batch_size=self.bs,verbose=0)
-        print(f'Test loss (on base model): {scores_prev[0]}')
+        print(f'\nTest loss (on base model): {scores_prev[0]}')
         print(f'Test accuracy (on base model): {scores_prev[1]}')
         print(f'The number of parameters (on base model): {params_prev}')
         print(f'The number of flops (on base model): {flops_prev}')
         params_after = count_params(best_model.trainable_weights)
         flops_after = count_flops(best_model)
         scores_after= best_model.evaluate(self.x_test, self.y_test, batch_size=self.bs,verbose=0)
-        print(f'Test loss (on pruned model): {scores_after[0]}')
+        print(f'\nTest loss (on pruned model): {scores_after[0]}')
         print(f'Test accuracy (on pruned model): {scores_after[1]}')
         print(f'The number of parameters (on pruned model): {params_after}')
         print(f'The number of flops (on prund model): {flops_after}')
@@ -146,7 +146,7 @@ class EagleEye(object):
         slash_idx=self.model_path.rfind('/')
         ext_idx=self.model_path.rfind('.')
         save_name=self.model_path[slash_idx:ext_idx]
-        tf.keras.models.save_model(best_model, self.result_dir+save_name+'_pruned.h5')
+        tf.keras.models.save_model(best_model, self.result_dir+save_name+'_pruned_'+str(self.max_rate)+'.h5')
 
 
 
