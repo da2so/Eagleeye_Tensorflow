@@ -40,7 +40,7 @@ Arguments:
 - `epochs` - The number of epochs
 
 Else if you want to use a pre-trained model, download the model through a download link in the below result section.
-Please put the downloaded models in the dir of `./saved_models/`.
+Please put the downloaded models in the directory of `./saved_models/`.
 
 
 ### Prune the model using EagleEye!!
@@ -90,7 +90,7 @@ The number of parameters (on pruned model): 27879963
 The number of flops (on prund model): 401208200
 ```
 
-Then, the pruned model will be saved in 'result'(default) folder.  
+Then, the pruned model will be saved in `./result/`(default) folder.  
 A result example is represented when before and after pruning:
 
 <img src="./assets/fig1.png" alt="drawing" width="550"/>
