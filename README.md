@@ -35,9 +35,11 @@ Arguments:
    - Available list
       - VGG: ['vgg11', 'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn']
       - ResNet: ['resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152']
-      - MobileNet: ['mobilenet']
+      - MobileNet: ['mobilenetv2']
 - `batch_size` - Batch size
 - `epochs` - The number of epochs
+- `lr` - Learning rate
+   - Default is 0.001 (set 0.01 when training mobilenetv2)
 
 Else if you want to use a pre-trained model, download the model through a download link in the below result section.
 Please put the downloaded models in the directory of `./saved_models/`.
@@ -57,6 +59,7 @@ Arguments:
 - `model_path` - Model path
 - `bs` - Batch size
 - `epochs` - The number of epochs
+- `lr` - Learning rate
 - `min_rate` - Minimum rate of search space
 - `max_rate` - Maximum rate of search space
 - `num_candidates` - The number of candidates

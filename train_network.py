@@ -9,7 +9,7 @@ from tensorflow.keras.optimizers import Adam
 
 from network.utils import load_dataset, load_model_arch, lr_scheduler
 class TrainTeacher(object):
-    def __init__(self,dataset_name, model_name, batch_size, epochs, save_dir ,data_augmentation,metrics='accuracy'):
+    def __init__(self,dataset_name, model_name, batch_size, epochs, lr, save_dir ,data_augmentation,metrics='accuracy'):
         self.dataset_name=dataset_name
         self.batch_size=batch_size
         self.model_name=model_name
@@ -19,7 +19,7 @@ class TrainTeacher(object):
         self.save_path=f'{save_dir}{self.dataset_name}_{self.model_name}.h5'
         self.epochs=epochs
         self.metrics=metrics
-        self.optimizer = Adam(learning_rate=0.001)
+        self.optimizer = Adam(learning_rate=lr)
         self.loss = tf.keras.losses.CategoricalCrossentropy()
         
         
@@ -93,6 +93,7 @@ def main():
     parser.add_argument('--model_name', type=str, default='vgg11_bn', help='Model name')
     parser.add_argument('--batch_size', type=int, default=256, help='Batch size')
     parser.add_argument('--epochs', type=int, default=200, help='Epochs')
+    parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
     parser.add_argument('--save_dir', type=str, default='./saved_models/', help='Saved model path')
     parser.add_argument('--data_augmentation', type=bool, default=True, help='Saved model path')
 
@@ -109,7 +110,8 @@ def main():
     trainer=TrainTeacher(dataset_name=args.dataset_name,
                         model_name=args.model_name, 
                         batch_size=args.batch_size, 
-                        epochs=args.epochs, 
+                        epochs=args.epochs,
+                        lr=args.lr,
                         save_dir=args.save_dir,
                         data_augmentation=args.data_augmentation,
                         metrics='accuracy'
