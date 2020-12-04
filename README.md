@@ -18,8 +18,6 @@ Then, you prepare runtime environment:
    pip install -r requirements.txt
    ```
 
-(I runned this program on python 3.6)
-
 ## Use
 
 ### Train base model
