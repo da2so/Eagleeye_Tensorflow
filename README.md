@@ -90,9 +90,10 @@ The number of parameters (on pruned model): 27879963
 The number of flops (on prund model): 401208200
 ```
 
-Then, the pruned model will be saved in 'result'(default) folder. The sub-architecture is represented when before and after pruning:
+Then, the pruned model will be saved in 'result'(default) folder.  
+A result example is represented when before and after pruning:
 
-<img src="./assets/fig1.png" alt="drawing" width="500"/>
+<img src="./assets/fig1.png" alt="drawing" width="550"/>
 
 
 ### ResNet 34 on cifar10
