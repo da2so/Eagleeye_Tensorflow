@@ -1,9 +1,11 @@
 import numpy as np
+import time
 from collections import defaultdict
 
 from tensorflow.python.keras import layers
 
 def get_strartegy_generation( model,min_rate, max_rate ):
+    np.random.seed(int(time.time()))
     channel_config= defaultdict()
     layer_info= defaultdict()
     

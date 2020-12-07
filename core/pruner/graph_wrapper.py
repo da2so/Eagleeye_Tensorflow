@@ -41,7 +41,6 @@ class GraphWrapper(object):
                 continue
         
 
-
     def build(self,del_layer_dict):
         prev_prune_idx=None
         first_dense=True
@@ -57,14 +56,12 @@ class GraphWrapper(object):
             if idx ==0:
                 self.layer_info[id(layer.output)].update({'out':x})
                 continue
-
+                
             # reconstruct each layer
-
             if type(layer) is layers.convolutional.Conv2D:
                 prev_prune_idx=self.get_prev_pruned_idx(layer.input, self.layer_info)
                 
                 pruned_weights = self.get_conv_pruned_weights(layer, del_layer_dict[idx],prev_prune_idx)
-
                 cutted_channl_num= len (del_layer_dict[idx])
                 
                 attr_name =inspect.getargspec(layers.convolutional.Conv2D.__init__)[0]
@@ -74,13 +71,20 @@ class GraphWrapper(object):
                 recon_layer = layers.convolutional.Conv2D(**attr_value)
 
                 self.layer_info[id(layer.output)].update({'pruned_idx':del_layer_dict[idx]})
+            elif type(layer) is layers.convolutional.DepthwiseConv2D:
+                prev_prune_idx=self.get_prev_pruned_idx(layer.input, self.layer_info)
+                
+                pruned_weights=self.get_depthwiseconv_pruned_weights(layer, prev_prune_idx)
+                
+                recon_layer = layer.__class__.from_config(layer.get_config())
+
+            
             elif type(layer) is layers.normalization_v2.BatchNormalization:
                 prev_prune_idx=self.get_prev_pruned_idx(layer.input, self.layer_info)
 
                 pruned_weights = self.get_batchnorm_pruned_weights(layer, prev_prune_idx)
-                
-                cutted_channl_num= len(prev_prune_idx)
 
+                cutted_channl_num= len(prev_prune_idx)
                 config = layer.get_config()
                 config['gamma_regularizer'] = None
                 recon_layer = layers.normalization_v2.BatchNormalization.from_config(config)
@@ -101,13 +105,12 @@ class GraphWrapper(object):
                 prev_prune_num =len( prev_prune_idx)
                 
                 config = layer.get_config()
-
                 original_shape = config['target_shape']
                 original_shape =list(original_shape)
                 original_shape[-1]= original_shape[-1]-prev_prune_num
-                
                 new_shape= tuple(original_shape)
                 config['target_shape']=new_shape
+
                 recon_layer = layer.__class__.from_config(config)
             else:
 
@@ -118,11 +121,13 @@ class GraphWrapper(object):
                 type(layer) is layers.Maximum or \
                 type(layer) is layers.Minimum:
                     pruned_idx=self.set_pruned_idx(layer.input, self.layer_info)
+                    
                     self.layer_info[id(layer.output)].update({'pruned_idx':pruned_idx})
 
                 
                 if type(layer) is layers.Concatenate:
                     pass
+                
                 recon_layer = layer.__class__.from_config(layer.get_config())
 
           
@@ -141,7 +146,7 @@ class GraphWrapper(object):
             
             x=recon_layer(x)    
             self.layer_info[id(layer.output)]['out']=x
-            
+                        
             try:
                 recon_layer.set_weights(pruned_weights)   
             except:
@@ -183,6 +188,22 @@ class GraphWrapper(object):
         bias= weights[1]
 
         return [pruned_kernel,bias]
+
+
+    def get_depthwiseconv_pruned_weights(self, layer , prev_pruned_idx=None):
+        weights=layer.get_weights()
+        kernel = weights[0]
+        pruned_kernel= np.delete(kernel, prev_pruned_idx, axis=-2)
+
+        #prune bias
+        prunned_bias = None
+        if layer.use_bias:
+            bias = weights[1]
+        
+        if layer.use_bias == True:
+            return [pruned_kernel, bias]
+        else:
+            return [pruned_kernel]
 
     def get_batchnorm_pruned_weights(self,layer, prune_idx):
         weights = layer.get_weights()
