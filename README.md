@@ -132,7 +132,7 @@ A result example is represented when before and after pruning:
 |Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
 |-----|---|--------------------|-----|---------|---------|--------|
 |Original|90.35%|None|175M|2.23M|26.5MB|[cifar10_mobilenetv2_bn.h5](https://drive.google.com/file/d/1P2nPGcc9ur9LRzQB-9xAfpmDiES8_dYt/view?usp=sharing)|
-|Pruned|90.75%%|[0, 0.5]|123M|1.45M|17.5MB|[cifar10_mobilenetv2_pruned0.5.h5](https://drive.google.com/file/d/1MkTQ4P7qYyNV1maI4p_ZT0pjj4AWaOGn/view?usp=sharing)|
+|Pruned|90.75%|[0, 0.5]|123M|1.45M|17.5MB|[cifar10_mobilenetv2_pruned0.5.h5](https://drive.google.com/file/d/1MkTQ4P7qYyNV1maI4p_ZT0pjj4AWaOGn/view?usp=sharing)|
 |Pruned|89.80%|[0, 0.7]|78M|0.98M|12.1MB|[cifar10_mobilenetv2_pruned0.7.h5](https://drive.google.com/file/d/1VxE2Zn8ZeZSxfZlCdYhV2Prfqrr4Ou4t/view?usp=sharing)|
 |Pruned|88.77%|[0, 0.9]|51M|0.43M|5.79MB|[cifar10_mobilenetv2_pruned0.9.h5](https://drive.google.com/file/d/1431GLHt76ty7xsA6wkuVVAWWTd_-6z7M/view?usp=sharing)|
 
