@@ -146,7 +146,11 @@ class EagleEye(object):
         slash_idx=self.model_path.rfind('/')
         ext_idx=self.model_path.rfind('.')
         save_name=self.model_path[slash_idx:ext_idx]
-        tf.keras.models.save_model(best_model, self.result_dir+save_name+'_pruned_'+str(self.max_rate)+'.h5')
+        tf.keras.models.save_model(
+                model=best_model, 
+                filepath=self.result_dir+save_name+'_pruned.h5',
+                include_optimizer=False
+                )
 
 
 
