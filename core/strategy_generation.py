@@ -14,7 +14,7 @@ def get_strartegy_generation( model,min_rate, max_rate ):
         
         layer_info[id(layer.output)]= {'layer_input':layer.input , 'idx':i}
         if isinstance(layer, layers.convolutional.Conv2D):
-            random_rate =(np.random.rand(1) * max_rate) +min_rate
+            random_rate = (max_rate-min_rate)*(np.random.rand(1) ) +min_rate
             layer_info[id(layer.output)].update( {'prune_rate':random_rate})
             channel_config[i]=random_rate
             
