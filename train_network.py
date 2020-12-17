@@ -5,11 +5,11 @@ import argparse
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam , SGD
 
 from network.utils import load_dataset, load_model_arch, lr_scheduler
 class TrainTeacher(object):
-    def __init__(self,dataset_name, model_name, batch_size, epochs, lr, save_dir ,data_augmentation,metrics='accuracy'):
+    def __init__(self,dataset_name, model_name, batch_size, epochs, lr,  save_dir ,data_augmentation,metrics='accuracy'):
         self.dataset_name=dataset_name
         self.batch_size=batch_size
         self.model_name=model_name
@@ -20,6 +20,7 @@ class TrainTeacher(object):
         self.epochs=epochs
         self.metrics=metrics
         self.optimizer = Adam(learning_rate=lr)
+        #self.optimizer= SGD(lr=2e-2, momentum=0.9, decay=0.0, nesterov=False)
         self.loss = tf.keras.losses.CategoricalCrossentropy()
         
         
@@ -31,11 +32,9 @@ class TrainTeacher(object):
     
 
     #Define callback function 
-    def get_callback_list(self,save_path,early_stop=True ,lr_reducer=True):
+    def get_callback_list(self,early_stop=True ,lr_reducer=True):
 
         callback_list=list()
-
-        callback_list.append(tf.keras.callbacks.ModelCheckpoint(filepath=save_path, save_best_only=True, period=1))
         
         if early_stop== True:
             callback_list.append(tf.keras.callbacks.EarlyStopping(min_delta=0, patience=20, verbose=2, mode='auto'))
@@ -47,7 +46,7 @@ class TrainTeacher(object):
 
     def train(self):
         self.model.compile(loss= self.loss,optimizer=self.optimizer,metrics=[self.metrics])
-        callback_list=self.get_callback_list(self.save_path)
+        callback_list=self.get_callback_list()
 
         if self.data_augmentation ==True:
 
@@ -80,6 +79,13 @@ class TrainTeacher(object):
         print('Test loss:', scores[0])
         print('Test accuracy:', scores[1])
 
+        #save model
+        tf.keras.models.save_model(
+                model=self.model, 
+                filepath=self.save_path,
+                include_optimizer=False
+                )
+
     def build(self):
         print(f'loading {self.model_name}..\n')
         self.train()
@@ -90,16 +96,16 @@ def main():
     
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset_name', type=str, default='cifar10', help='Dataset [ "cifar10", "cifar100" ] ')
-    parser.add_argument('--model_name', type=str, default='vgg11_bn', help='Model name')
+    parser.add_argument('--model_name', type=str, default='mobilenetv2', help='Model name')
     parser.add_argument('--batch_size', type=int, default=256, help='Batch size')
     parser.add_argument('--epochs', type=int, default=200, help='Epochs')
-    parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
+    parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
     parser.add_argument('--save_dir', type=str, default='./saved_models/', help='Saved model path')
     parser.add_argument('--data_augmentation', type=bool, default=True, help='Saved model path')
 
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ['TF2_BEHAVIOR'] = '1'
-    os.environ['CUDA_VISIBLE_DEVICES']= '0'
+    os.environ['CUDA_VISIBLE_DEVICES']= '3'
 
     config = tf.compat.v1.ConfigProto()
     config.gpu_options.per_process_gpu_memory_fraction = 0.8
