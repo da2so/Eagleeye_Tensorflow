@@ -18,6 +18,7 @@ def main():
     parser.add_argument('--max_rate',type=float, default=0.5, help='define maximum of search space')
     parser.add_argument('--flops_target', type=float, default=0.5, help='flops constraints for pruning')
     parser.add_argument('--num_candidates', type=int, default=15, help='the number of candidates')
+    parser.add_argument('--data_augmentation', type=bool, default=True, help='do data augmentation?')
     parser.add_argument('--result_dir', type=str, default='./result', help='result directory for a prunned model')
 
 
@@ -40,7 +41,8 @@ def main():
                         max_rate=args.max_rate,
                         flops_target=args.flops_target,
                         num_candidates=args.num_candidates,
-                        result_dir=args.result_dir
+                        result_dir=args.result_dir,
+                        data_augmentation=args.data_augmentation
                         )
 
     eagleeye_obj.build()

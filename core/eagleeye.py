@@ -14,7 +14,7 @@ from core.pruner.l1norm  import l1_pruning
 
 class EagleEye(object):
     def __init__(self,dataset_name,model_path,bs,epochs,lr,\
-        min_rate,max_rate,flops_target,num_candidates,result_dir):
+        min_rate,max_rate,flops_target,num_candidates,result_dir,data_augmentation):
 
         self.dataset_name=dataset_name
         self.bs=bs
@@ -28,6 +28,7 @@ class EagleEye(object):
             os.makedirs(self.result_dir)
         self.model_path=model_path
         self.num_candidates=num_candidates
+        self.data_augmentation=data_augmentation
 
         #Load a base model
         self.net=load_network(model_path)
@@ -81,7 +82,6 @@ class EagleEye(object):
         
         #Fine tuning
         metrics='accuracy'
-        data_augmentation=True
         optimizer = Adam(learning_rate=self.lr)
         loss = tf.keras.losses.CategoricalCrossentropy()
         
@@ -101,7 +101,7 @@ class EagleEye(object):
         self.net.compile(loss= loss,optimizer=optimizer,metrics=[metrics])
         callback_list=get_callback_list(self.result_dir)
 
-        if data_augmentation ==True:
+        if self.data_augmentation ==True:
 
             datagen = ImageDataGenerator(   featurewise_center=False,  # set input mean to 0 over the dataset
                                             samplewise_center=False,  # set each sample mean to 0
