@@ -124,8 +124,8 @@ A result example is represented when before and after pruning:
 |Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
 |-----|---|--------------------|-----|---------|---------|--------|
 |Original|91.99%|None|664M|33.64M|128MB|[cifar10_vgg16_bn.h5](https://drive.google.com/file/d/1YZJ-I5V2RZOwMYwwY5T7VhQd48wPsTQb/view?usp=sharing)|
-|Pruned|91.44%|[0, 0.5]|394M|26.27M|96.2MB|[cifar10_vgg16_bn_pruned0.5.h5](https://drive.google.com/file/d/1T_dHGEJphXzufahiimdSH6U-CCaNV9po/view?usp=sharing)|
-|Pruned|90.81%|[0, 0.7]|298M|25.18M|MB|[cifar10_vgg16_bn_pruned0.7.h5](https://drive.google.com/file/d/1u15n_rRYd-ARaIF-IPP57MAFyoMfU7Q7/view?usp=sharing)|
+|Pruned|91.44%|[0, 0.5]|394M|26.27M|100MB|[cifar10_vgg16_bn_pruned0.5.h5](https://drive.google.com/file/d/1T_dHGEJphXzufahiimdSH6U-CCaNV9po/view?usp=sharing)|
+|Pruned|90.81%|[0, 0.7]|298M|25.18M|96.2MB|[cifar10_vgg16_bn_pruned0.7.h5](https://drive.google.com/file/d/1u15n_rRYd-ARaIF-IPP57MAFyoMfU7Q7/view?usp=sharing)|
 |Pruned|90.42%|[0, 0.9]|293M|21.9M|83.86MB|[cifar10_vgg16_bn_pruned0.9.h5](https://drive.google.com/file/d/1Hm1Ui068Cd7fdVg_-VytZ7sstTMoP9MK/view?usp=sharing)|
 
 ### MobileNetv2 on cifar10
