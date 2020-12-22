@@ -1,3 +1,4 @@
+
 # Eagleeye: fast sub-net evaluation for efficient neural network pruning
 
 
@@ -103,38 +104,38 @@ A result example is represented when before and after pruning:
 
 |Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
 |-----|---|--------------------|-----|---------|---------|--------|
-|Original|90.99%|None|145M|1.33M|15.9MB|[cifar10_resnet34.h5](https://drive.google.com/file/d/1SLqkXqImSIFBFEB_GRH7KGDxjojouqGD/view?usp=sharing)|
-|Pruned|90.94%|[0, 0.5]|107M|1.07M|12.5MB|[cifar10_resnet34_pruned0.5.h5](https://drive.google.com/file/d/1GuJAHrrWb_aa3DA4POhum562prSUWN9K/view?usp=sharing)|
-|Pruned|90.95%|[0, 0.7]|87M|0.90M|10.9MB|[cifar10_resnet34_pruned0.7.h5](https://drive.google.com/file/d/1aC-vINStAd1H5jwMlGS9GVwfpH18Kf9U/view?usp=sharings)|
-|Pruned|89.14%|[0, 0.9]|59M|0.65M|8.17MB|[cifar10_resnet34_pruned0.9.h5](https://drive.google.com/file/d/1BUf_ml56DQG9k4AdD4Kfgm1LE2fuis-G/view?usp=sharing)|
+|Original|90.11%|None|145M|1.33M|5.44MB|[cifar10_resnet34.h5](https://drive.google.com/file/d/1SJS61fUh_GsnlBI3WB__JtdO70Zfj7Ms/view?usp=sharing)|
+|Pruned|90.50%|[0, 0.5]|106M|0.86M|3.64MB|[cifar10_resnet34_pruned0.5.h5](https://drive.google.com/file/d/1VRTAiIvF7B7-AejxLunaCtOWFTan5p0U/view?usp=sharing)|
+|Pruned|89.02%|[0, 0.7]|69M|0.55M|2.46MB|[cifar10_resnet34_pruned0.7.h5](https://drive.google.com/file/d/1z77mbXxagEyc9TKxDXISgNmQ-74Tkc0_/view?usp=sharing)|
+|Pruned||[0, 0.9]|M|M|MB|[cifar10_resnet34_pruned0.9.h5]()|
 
 ### ResNet 18 on cifar10
 
 |Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
 |-----|---|--------------------|-----|---------|---------|--------|
-|Original|88.49%|None|70.2M|0.70M|8.4MB|[cifar10_resnet18.h5](https://drive.google.com/file/d/16mKwg1doK1fD6TlKWWxFZcke3Iov4hYk/view?usp=sharing)|
-|Pruned|88.41%|[0, 0.5]|41.0M|0.43M|5.30MB|[cifar10_resnet18_pruned0.5.h5](https://drive.google.com/file/d/1qzEb1OtlU0-G6tJT6Dv9KF6zSdRxfg6F/view?usp=sharing)|
-|Pruned|88.80%|[0, 0.7]|46.4M|0.42M|5.25MB|[cifar10_resnet18_pruned0.7.h5](https://drive.google.com/file/d/1Ly-iB_hTf8oK8U75yZa_jX7l14xHrT--/view?usp=sharing)|
-|Pruned|86.11%|[0, 0.9]|24.2M|0.15M|2.12MB|[cifar10_resnet18_pruned0.9.h5](https://drive.google.com/file/d/1CWosBFFYoZrWt5-nTVk711kMzkoU0q4Q/view?usp=sharing)|
+|Original|88.30%|None|70.2M|0.70M|2.87MB|[cifar10_resnet18.h5](https://drive.google.com/file/d/1fu_DlI-YLm3IunHFmq-UFi-p4ecXBUq6/view?usp=sharing)|
+|Pruned|88.02%|[0, 0.5]|50.9M|0.47M|2.01MB|[cifar10_resnet18_pruned0.5.h5](https://drive.google.com/file/d/187fYZvDfHj8w_YM_JguPyet0SsPD8GXg/view?usp=sharing)|
+|Pruned|87.09%|[0, 0.7]|33.1M|0.26M|1.20MB|[cifar10_resnet18_pruned0.7.h5](https://drive.google.com/file/d/18nrWoX-1TKtLFbiedOkJywHxUS6PGpfo/view?usp=sharing)|
+|Pruned||[0, 0.9]|M|5M|MB|[cifar10_resnet18_pruned0.9.h5]()|
 
 
 ### VGG 16_bn on cifar10
 
 |Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
 |-----|---|--------------------|-----|---------|---------|--------|
-|Original|91.72%|None|664M|33.64M|385 MB|[cifar10_vgg16_bn.h5](https://drive.google.com/file/d/1zivoy2hB7_8bBFqN9fqDcOQQQ4LDwaMa/view?usp=sharing)|
-|Pruned|91.37%|[0, 0.5]|401M|27.87M|319MB|[cifar10_vgg16_bn_pruned0.5.h5](https://drive.google.com/file/d/1rLVbvRqheHEtQLpkJSErIoYUK28_BTlC/view?usp=sharing)|
-|Pruned|90.92%|[0, 0.7]|328M|24.92M|285MB|[cifar10_vgg16_bn_pruned0.7.h5](https://drive.google.com/file/d/1WA0o_JrMtSYaqIJaBVCjRKuASkXxm66s/view?usp=sharing)|
-|Pruned|90.79%|[0, 0.9]|271M|22.68M|259MB|[cifar10_vgg16_bn_pruned0.9.h5](https://drive.google.com/file/d/1WQk_AwWNLBBcYgqrEknC2xyr_qQP_bYF/view?usp=sharing)|
+|Original|91.99%|None|664M|33.64M|128MB|[cifar10_vgg16_bn.h5](https://drive.google.com/file/d/1YZJ-I5V2RZOwMYwwY5T7VhQd48wPsTQb/view?usp=sharing)|
+|Pruned|91.44%|[0, 0.5]|394M|26.27M|96.2MB|[cifar10_vgg16_bn_pruned0.5.h5](https://drive.google.com/file/d/1T_dHGEJphXzufahiimdSH6U-CCaNV9po/view?usp=sharing)|
+|Pruned|90.81%|[0, 0.7]|298M|25.18M|MB|[cifar10_vgg16_bn_pruned0.7.h5](https://drive.google.com/file/d/1u15n_rRYd-ARaIF-IPP57MAFyoMfU7Q7/view?usp=sharing)|
+|Pruned|90.42%|[0, 0.9]|293M|21.9M|83.86MB|[cifar10_vgg16_bn_pruned0.9.h5](https://drive.google.com/file/d/1Hm1Ui068Cd7fdVg_-VytZ7sstTMoP9MK/view?usp=sharing)|
 
 ### MobileNetv2 on cifar10
 
 |Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
 |-----|---|--------------------|-----|---------|---------|--------|
-|Original|90.35%|None|175M|2.23M|26.5MB|[cifar10_mobilenetv2_bn.h5](https://drive.google.com/file/d/1P2nPGcc9ur9LRzQB-9xAfpmDiES8_dYt/view?usp=sharing)|
-|Pruned|90.75%|[0, 0.5]|123M|1.45M|17.5MB|[cifar10_mobilenetv2_pruned0.5.h5](https://drive.google.com/file/d/1MkTQ4P7qYyNV1maI4p_ZT0pjj4AWaOGn/view?usp=sharing)|
-|Pruned|89.80%|[0, 0.7]|78M|0.98M|12.1MB|[cifar10_mobilenetv2_pruned0.7.h5](https://drive.google.com/file/d/1VxE2Zn8ZeZSxfZlCdYhV2Prfqrr4Ou4t/view?usp=sharing)|
-|Pruned|88.77%|[0, 0.9]|51M|0.43M|5.79MB|[cifar10_mobilenetv2_pruned0.9.h5](https://drive.google.com/file/d/1431GLHt76ty7xsA6wkuVVAWWTd_-6z7M/view?usp=sharing)|
+|Original|90.14%|None|175M|2.23M|9.10MB|[cifar10_mobilenetv2_bn.h5](https://drive.google.com/file/d/1zVtZ2jwNTyn3Bo0D8V0xfRPpEjWZg09s/view?usp=sharing))|
+|Pruned|90.57%|[0, 0.5]|126M|1.62M|6.72MB|[cifar10_mobilenetv2_pruned0.5.h5](https://drive.google.com/file/d/1MLg909rak-78fZ5gHOsLMFBy2deXzZkJ/view?usp=sharing)|
+|Pruned|89.13%|[0, 0.7]|81M|0.90M|3.96MB|[cifar10_mobilenetv2_pruned0.7.h5](https://drive.google.com/file/d/1CDYObh6cJUIRS0Gc4m6BmVlQejcVs8We/view?usp=sharing)|
+|Pruned|90.54%|[0, 0.9]|70M|0.62M|2.92MB|[cifar10_mobilenetv2_pruned0.9.h5](https://drive.google.com/file/d/1GjUXOepwrMkBOYm5c239wJP64sHLrb-8/view?usp=sharing)|
 
 
 :no_entry: If you run this code, the result would be a bit different from mine.
