@@ -106,8 +106,8 @@ A result example is represented when before and after pruning:
 |-----|---|--------------------|-----|---------|---------|--------|
 |Original|90.11%|None|145M|1.33M|5.44MB|[cifar10_resnet34.h5](https://drive.google.com/file/d/1SJS61fUh_GsnlBI3WB__JtdO70Zfj7Ms/view?usp=sharing)|
 |Pruned|90.50%|[0, 0.5]|106M|0.86M|3.64MB|[cifar10_resnet34_pruned0.5.h5](https://drive.google.com/file/d/1VRTAiIvF7B7-AejxLunaCtOWFTan5p0U/view?usp=sharing)|
-|Pruned|89.02%|[0, 0.7]|69M|0.55M|2.46MB|[cifar10_resnet34_pruned0.7.h5](https://drive.google.com/file/d/1z77mbXxagEyc9TKxDXISgNmQ-74Tkc0_/view?usp=sharing)|
-|Pruned||[0, 0.9]|M|M|MB|[cifar10_resnet34_pruned0.9.h5]()|
+|Pruned|89.02%|[0, 0.7]|69M|0.55M|2.60MB|[cifar10_resnet34_pruned0.7.h5](https://drive.google.com/file/d/1z77mbXxagEyc9TKxDXISgNmQ-74Tkc0_/view?usp=sharing)|
+|Pruned|89.30%|[0, 0.9]|62M|0.54M|2.52MB|[cifar10_resnet34_pruned0.9.h5](https://drive.google.com/file/d/1uBJoaovFkEwSbaF_AggxUP70MShPOJSc/view?usp=sharing)|
 
 ### ResNet 18 on cifar10
 
@@ -116,7 +116,7 @@ A result example is represented when before and after pruning:
 |Original|88.30%|None|70.2M|0.70M|2.87MB|[cifar10_resnet18.h5](https://drive.google.com/file/d/1fu_DlI-YLm3IunHFmq-UFi-p4ecXBUq6/view?usp=sharing)|
 |Pruned|88.02%|[0, 0.5]|50.9M|0.47M|2.01MB|[cifar10_resnet18_pruned0.5.h5](https://drive.google.com/file/d/187fYZvDfHj8w_YM_JguPyet0SsPD8GXg/view?usp=sharing)|
 |Pruned|87.09%|[0, 0.7]|33.1M|0.26M|1.20MB|[cifar10_resnet18_pruned0.7.h5](https://drive.google.com/file/d/18nrWoX-1TKtLFbiedOkJywHxUS6PGpfo/view?usp=sharing)|
-|Pruned||[0, 0.9]|M|5M|MB|[cifar10_resnet18_pruned0.9.h5]()|
+|Pruned|85.65%|[0, 0.9]|21.4M|0.08M|0.51MB|[cifar10_resnet18_pruned0.9.h5](https://drive.google.com/file/d/1JjoqWf3motY_swaQ4rBIQMRTteJo2zsL/view?usp=sharing)|
 
 
 ### VGG 16_bn on cifar10
