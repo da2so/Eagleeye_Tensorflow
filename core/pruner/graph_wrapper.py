@@ -121,12 +121,12 @@ class GraphWrapper(object):
                 type(layer) is layers.Maximum or \
                 type(layer) is layers.Minimum:
                     pruned_idx=self.set_pruned_idx(layer.input, self.layer_info)
-                    
                     self.layer_info[id(layer.output)].update({'pruned_idx':pruned_idx})
 
                 
                 if type(layer) is layers.Concatenate:
-                    pass
+                    pruned_idx=self.set_pruned_idx_for_concat(layer.input, self.layer_info)
+                    self.layer_info[id(layer.output)].update({'pruned_idx':pruned_idx})
                 
                 recon_layer = layer.__class__.from_config(layer.get_config())
 
@@ -222,10 +222,31 @@ class GraphWrapper(object):
                 prev_pruned_idx =layer_info[id(in_layer)]['pruned_idx']
                 return prev_pruned_idx
     
+    def set_pruned_idx_for_concat(self, layer_list , layer_info):
+        pruned_idx_set=set()
+        is_second_input=False
+        for in_layer in layer_list:
+            
+            while 1:
+                if 'pruned_idx' not in layer_info[id(in_layer)]:
+                    in_layer=layer_info[id(in_layer)]['layer_input']
+                else:
+                    if is_second_input==False:
+                        prev_layer_len=in_layer.shape[3]
+                        pruned_idx_set.update(layer_info[id(in_layer)]['pruned_idx'])
+                        is_second_input=True
+                    else:
+                        pruned_idx= layer_info[id(in_layer)]['pruned_idx']+prev_layer_len
+                        pruned_idx_set.update(pruned_idx)
+                        prev_layer_len=in_layer.shape[3]
+                    break
+
+        pruned_idx_list=list( pruned_idx_set) 
+        return pruned_idx_list
+                    
 
     def set_pruned_idx(self, layer_list , layer_info):
         pruned_idx_set=set()
-        in_layer_num=0
         for in_layer in layer_list:
             
             while 1:
