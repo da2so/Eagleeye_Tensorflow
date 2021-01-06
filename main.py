@@ -11,7 +11,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset_name', type=str, default='cifar10', choices=['cifar10','cifar100'])
     parser.add_argument('--model_path', type=str, default='./saved_models/cifar10_resnet34.h5', help = 'model path')
-    parser.add_argument('--bs', type=int, default=256, help = 'batch size')
+    parser.add_argument('--bs', type=int, default=128, help = 'batch size')
     parser.add_argument('--epochs', type=int, default=100, help='epoch while fine-tuning')
     parser.add_argument('--lr', type=float, default=0.001 , help='learning rate')
     parser.add_argument('--min_rate',type=float, default=0.0, help='define minimum of search space')
