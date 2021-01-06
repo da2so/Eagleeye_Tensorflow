@@ -37,6 +37,7 @@ Arguments:
       - VGG: ['vgg11', 'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn']
       - ResNet: ['resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152']
       - MobileNet: ['mobilenetv2']
+      - DenseNet: ['densenet40_f12','densenet100_f12']
 - `batch_size` - Batch size
 - `epochs` - The number of epochs
 - `lr` - Learning rate
@@ -137,6 +138,14 @@ A result example is represented when before and after pruning:
 |Pruned|89.13%|[0, 0.7]|81M|0.90M|3.96MB|[cifar10_mobilenetv2_pruned0.7.h5](https://drive.google.com/file/d/1CDYObh6cJUIRS0Gc4m6BmVlQejcVs8We/view?usp=sharing)|
 |Pruned|90.54%|[0, 0.9]|70M|0.62M|2.92MB|[cifar10_mobilenetv2_pruned0.9.h5](https://drive.google.com/file/d/1GjUXOepwrMkBOYm5c239wJP64sHLrb-8/view?usp=sharing)|
 
+### DenseNet40 on cifar10
+
+|Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
+|-----|---|--------------------|-----|---------|---------|--------|
+|Original|91.32%|None|51M|1.00M|4.27MB|[cifar10_densenet40_bn.h5](https://drive.google.com/file/d/1gHUozIUE9pLGMekbP9lM5oqcw_Q_rgYX/view?usp=sharing)|
+|Pruned|91.13%|[0, 0.5]|32M|0.68M|3.07MB|[cifar10_densenet40_pruned0.5.h5](https://drive.google.com/file/d/1GCC3KSiJsHjUjQsO2ZL2L0HjUvBYP4F9/view?usp=sharing)|
+|Pruned|90.95%|[0, 0.7]|24M|0.54M|2.49MB|[cifar10_densenet40_pruned0.7.h5](https://drive.google.com/file/d/1F-5pk36kTMSqgs8zqaWWl8mC06AG5D_Z/view?usp=sharing)|
+|Pruned|90.31%|[0, 0.9]|20M|0.41M|2.00MB|[cifar10_densenet40_pruned0.9.h5](https://drive.google.com/file/d/1LLH8s5SAo3kyoQ556W_ePDDTuh8DomMO/view?usp=sharing)|
 
 :no_entry: If you run this code, the result would be a bit different from mine.
 
