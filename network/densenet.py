@@ -51,7 +51,8 @@ def conv_block(x, filter_num, name):
 def DenseNet(blocks,
             filter_num=None,
             input_shape=None,
-            classes=1000,
+            reduce=None,
+            classes=10,
             **kwargs):
 
 
@@ -63,9 +64,9 @@ def DenseNet(blocks,
     x = layers.Conv2D(filter_num, 3, use_bias=False, padding='same',name='conv1/conv')(img_input)
 
     x = dense_block(x, filter_num, blocks[0], name='conv2')
-    x = transition_block(x, 1.0, name='pool2')
+    x = transition_block(x, reduce, name='pool2')
     x = dense_block(x, filter_num, blocks[1], name='conv3')
-    x = transition_block(x, 1.0, name='pool3')
+    x = transition_block(x, reduce, name='pool3')
     x = dense_block(x, filter_num, blocks[2], name='conv4')
 
 
@@ -95,6 +96,7 @@ def densenet40_f12(input_shape=None,classes=10):
     return DenseNet(blocks = [12, 12, 12], 
                     input_shape = input_shape, 
                     filter_num = 12,
+                    reduce = 1.0,
                     classes = classes
                     )
 
@@ -102,12 +104,14 @@ def densenet100_f12(input_shape=None,classes=10):
     return DenseNet(blocks = [32, 32, 32], 
                     input_shape = input_shape, 
                     filter_num = 12,
+                    reduce = 0.5,                    
                     classes = classes
                     )
 def densenet100_f24(input_shape = None,classes=10):
     return DenseNet(blocks = [32, 32, 32],
                     input_shape = input_shape,
                     filter_num = 24,
+                    reduce = 0.5,
                     classes = classes
                     )
 
