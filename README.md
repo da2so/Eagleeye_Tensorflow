@@ -147,6 +147,16 @@ A result example is represented when before and after pruning:
 |Pruned|90.95%|[0, 0.7]|24M|0.54M|2.49MB|[cifar10_densenet40_pruned0.7.h5](https://drive.google.com/file/d/1F-5pk36kTMSqgs8zqaWWl8mC06AG5D_Z/view?usp=sharing)|
 |Pruned|90.31%|[0, 0.9]|20M|0.41M|2.00MB|[cifar10_densenet40_pruned0.9.h5](https://drive.google.com/file/d/1LLH8s5SAo3kyoQ556W_ePDDTuh8DomMO/view?usp=sharing)|
 
+### DenseNet100 on cifar10
+
+|Model|Acc|[min_rate, max_rate]|Flops|Param num|File size|Download|
+|-----|---|--------------------|-----|---------|---------|--------|
+|Original|93.26%|None|2540M|3.98M|16.4MB|[cifar10_densenet100_bn.h5](https://drive.google.com/file/d/1GmCfYv32MnoWvSyoYc7M26AhNGc2xRSI/view?usp=sharing)|
+|Pruned|93.12%|[0, 0.5]|1703M|2.74M|11.6MB|[cifar10_densenet100_pruned0.5.h5](https://drive.google.com/file/d/1RLNUeS4DKdSAGf1iUaY9FoDn1LEymdUJ/view?usp=sharing)|
+|Pruned|93.12%|[0, 0.7]|1467M|2.41M|10.4MB|[cifar10_densenet100_pruned0.7.h5](https://drive.google.com/file/d/17KCmlrBfuecI0Qke45W78wCF6WnauVkp/view?usp=sharing)|
+|Pruned|93.00%|[0, 0.9]|1000M|1.65M|7.44MB|[cifar10_densenet100_pruned0.9.h5](https://drive.google.com/file/d/1q5yvwSd146wYm2hnTWfTac3mQ-F1hzhe/view?usp=sharing)|
+
+
 :no_entry: If you run this code, the result would be a bit different from mine.
 
 
