@@ -14,7 +14,7 @@ from tensorflow.keras import Sequential, Model
 
 def load_network(model_path):
     if '.h5' in model_path:
-        model= tf.keras.models.load_model(model_path)
+        model = tf.keras.models.load_model(model_path)
     else:
         if 'resnet50v2' in model_path:
             model = ResNet50V2(weights='imagenet')

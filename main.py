@@ -14,8 +14,8 @@ def main():
     parser.add_argument('--bs', type=int, default=128, help = 'batch size')
     parser.add_argument('--epochs', type=int, default=100, help='epoch while fine-tuning')
     parser.add_argument('--lr', type=float, default=0.001 , help='learning rate')
-    parser.add_argument('--min_rate',type=float, default=0.0, help='define minimum of search space')
-    parser.add_argument('--max_rate',type=float, default=0.5, help='define maximum of search space')
+    parser.add_argument('--min_rate', type=float, default=0.0, help='define minimum of search space')
+    parser.add_argument('--max_rate', type=float, default=0.5, help='define maximum of search space')
     parser.add_argument('--flops_target', type=float, default=0.5, help='flops constraints for pruning')
     parser.add_argument('--num_candidates', type=int, default=15, help='the number of candidates')
     parser.add_argument('--data_augmentation', type=bool, default=True, help='do data augmentation?')
@@ -32,18 +32,18 @@ def main():
     
     args = parser.parse_args()
 
-    eagleeye_obj=EagleEye(dataset_name=args.dataset_name,
-                        model_path=args.model_path,
-                        bs=args.bs,
-                        epochs=args.epochs,
-                        lr=args.lr,
-                        min_rate=args.min_rate,
-                        max_rate=args.max_rate,
-                        flops_target=args.flops_target,
-                        num_candidates=args.num_candidates,
-                        result_dir=args.result_dir,
-                        data_augmentation=args.data_augmentation
-                        )
+    eagleeye_obj=EagleEye(dataset_name =args.dataset_name,
+                          model_path=args.model_path,
+                          bs=args.bs,
+                          epochs=args.epochs,
+                          lr=args.lr,
+                          min_rate=args.min_rate,
+                          max_rate=args.max_rate,
+                          flops_target=args.flops_target,
+                          num_candidates=args.num_candidates,
+                          result_dir=args.result_dir,
+                          data_augmentation=args.data_augmentation
+                         )
 
     eagleeye_obj.build()
 

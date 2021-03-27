@@ -9,34 +9,34 @@ from tensorflow.keras.optimizers import Adam , SGD
 
 from network.utils import load_dataset, load_model_arch, lr_scheduler
 class TrainTeacher(object):
-    def __init__(self,dataset_name, model_name, batch_size, epochs, lr,  save_dir ,data_augmentation,metrics='accuracy'):
-        self.dataset_name=dataset_name
-        self.batch_size=batch_size
-        self.model_name=model_name
-        self.data_augmentation=data_augmentation
+    def __init__(self,dataset_name, model_name, batch_size, epochs, lr,  save_dir, data_augmentation, metrics='accuracy'):
+        self.dataset_name = dataset_name
+        self.batch_size = batch_size
+        self.model_name = model_name
+        self.data_augmentation = data_augmentation
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
-        self.save_path=f'{save_dir}{self.dataset_name}_{self.model_name}.h5'
-        self.epochs=epochs
-        self.metrics=metrics
+        self.save_path = f'{save_dir}{self.dataset_name}_{self.model_name}.h5'
+        self.epochs = epochs
+        self.metrics = metrics
         self.optimizer = Adam(learning_rate=lr)
         #self.optimizer= SGD(lr=2e-2, momentum=0.9, decay=0.0, nesterov=False)
         self.loss = tf.keras.losses.CategoricalCrossentropy()
         
         
         #Load train and validation dataset
-        self.x_train,self.y_train,self.x_test, self.y_test,self.num_classes , self.img_shape = load_dataset(self.dataset_name, self.batch_size)
+        self.x_train, self.y_train, self.x_test, self.y_test, self.num_classes , self.img_shape = load_dataset(self.dataset_name, self.batch_size)
 
         #Load model architecture
-        self.model=load_model_arch(self.model_name,self.img_shape,self.num_classes)
+        self.model = load_model_arch(self.model_name,self.img_shape,self.num_classes)
     
 
     #Define callback function 
-    def get_callback_list(self,early_stop=True ,lr_reducer=True):
+    def get_callback_list(self,early_stop=True, lr_reducer=True):
 
-        callback_list=list()
+        callback_list = list()
         
-        if early_stop== True:
+        if early_stop == True:
             callback_list.append(tf.keras.callbacks.EarlyStopping(min_delta=0, patience=20, verbose=2, mode='auto'))
         if lr_reducer == True:
             callback_list.append(tf.keras.callbacks.ReduceLROnPlateau(factor=0.1, cooldown=0, patience=10, min_lr=0.5e-6))
@@ -45,10 +45,10 @@ class TrainTeacher(object):
         return callback_list
 
     def train(self):
-        self.model.compile(loss= self.loss,optimizer=self.optimizer,metrics=[self.metrics])
-        callback_list=self.get_callback_list()
+        self.model.compile(loss= self.loss, optimizer=self.optimizer, metrics=[self.metrics])
+        callback_list = self.get_callback_list()
 
-        if self.data_augmentation ==True:
+        if self.data_augmentation == True:
 
             datagen = ImageDataGenerator(   featurewise_center=False,  # set input mean to 0 over the dataset
                                             samplewise_center=False,  # set each sample mean to 0
@@ -68,14 +68,14 @@ class TrainTeacher(object):
                 validation_data=(self.x_test,self.y_test), callbacks=callback_list)
 
         else:
-            self.model.fit(self.x_train, self.y_train, batch_size=self.batch_size, epochs=self.epochs,\
+            self.model.fit(self.x_train, self.y_train, batch_size=self.batch_size, epochs=self.epochs, \
                 validation_data=(self.x_test,self.y_test), callbacks=callback_list)
        
 
     def test(self):
         self.model.compile(optimizer=self.optimizer, loss=self.loss, metrics=self.metrics)
         self.val_dataset = tf.data.Dataset.from_tensor_slices((self.x_test, self.y_test)).batch(self.batch_size)
-        scores= self.model.evaluate(self.val_dataset,batch_size=self.batch_size)
+        scores = self.model.evaluate(self.val_dataset,batch_size=self.batch_size)
         print('Test loss:', scores[0])
         print('Test accuracy:', scores[1])
 
@@ -95,7 +95,7 @@ class TrainTeacher(object):
 def main():
     
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset_name', type=str, default='cifar10', help='Dataset [ "cifar10", "cifar100" ] ')
+    parser.add_argument('--dataset_name', type=str, default='cifar10', choices=['cifar10', 'cifar100'] help='Dataset [ "cifar10", "cifar100" ]')
     parser.add_argument('--model_name', type=str, default='mobilenetv2', help='Model name')
     parser.add_argument('--batch_size', type=int, default=128, help='Batch size')
     parser.add_argument('--epochs', type=int, default=200, help='Epochs')
@@ -114,14 +114,14 @@ def main():
     args = parser.parse_args()
 
     trainer=TrainTeacher(dataset_name=args.dataset_name,
-                        model_name=args.model_name, 
-                        batch_size=args.batch_size, 
-                        epochs=args.epochs,
-                        lr=args.lr,
-                        save_dir=args.save_dir,
-                        data_augmentation=args.data_augmentation,
-                        metrics='accuracy'
-                        )
+                         model_name=args.model_name,
+                         batch_size=args.batch_size,
+                         epochs=args.epochs,
+                         lr=args.lr,
+                         save_dir=args.save_dir,
+                         data_augmentation=args.data_augmentation,
+                         metrics='accuracy'
+                         )
 
     trainer.build()
 
